@@ -2,13 +2,16 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class ForumEntity {
+export class CommentsEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
-    userName: string;
+    fullName: string;
 
     @Column()
-    message: string;
+    description: string;
+
+    @Column()
+    rating: number;
 }
