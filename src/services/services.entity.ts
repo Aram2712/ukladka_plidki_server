@@ -1,20 +1,19 @@
-
-import { Column, PrimaryGeneratedColumn, Entity } from "typeorm";
+import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
 
 @Entity()
 export class ServicesEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @Column()
-    description: string
+  @Column()
+  description: string;
 
-    @Column()
-    price: string
+  @Column()
+  price: string;
 
-    @Column({nullable:true})
-    imagesPaths: string;
+  @Column({ nullable: true })
+  imagesPaths: string;
 }

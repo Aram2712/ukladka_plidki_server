@@ -1,20 +1,19 @@
-
-import { Column, PrimaryGeneratedColumn, OneToMany, Entity } from "typeorm";
+import { Column, PrimaryGeneratedColumn, OneToMany, Entity } from 'typeorm';
 
 @Entity()
 export class AuthEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    fullName: string;
+  @Column()
+  fullName: string;
 
-    @Column()
-    phoneNumber: string;
+  @Column()
+  phoneNumber: string;
 
-    @Column()
-    password: string;
+  @Column()
+  password: string;
 
-    @Column()
-    role: string;
+  @Column()
+  role: string;
 }

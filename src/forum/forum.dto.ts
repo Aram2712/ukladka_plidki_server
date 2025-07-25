@@ -1,15 +1,15 @@
-import { IsString, IsNotEmpty, IsOptional, IsNumber } from "class-validator";
+import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 
 export class ForumDto {
-    @IsOptional()
-    @IsNumber()
-    id: number
+  @IsOptional()
+  @IsNumber()
+  id: number;
 
-    @IsNotEmpty()
-    @IsString()
-    userName: string
+  @IsNotEmpty()
+  @IsString()
+  userName: string;
 
-    @IsNotEmpty()
-    @IsString()
-    message: string
+  @IsNotEmpty()
+  @IsString()
+  message: string;
 }

@@ -1,4 +1,3 @@
-
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
@@ -11,41 +10,39 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 async function bootstrap() {
+  const httpsOptions = {
+    key: fs.readFileSync(process.env.SSL_KEY_PATH!),
+    cert: fs.readFileSync(process.env.SSL_CERT_PATH!),
+    secureProtocol: 'TLS_method',
+    ciphers: [
+      'ECDHE-ECDSA-AES128-GCM-SHA256',
+      'ECDHE-RSA-AES128-GCM-SHA256',
+      'ECDHE-ECDSA-AES256-GCM-SHA384',
+      'ECDHE-RSA-AES256-GCM-SHA384',
+      'ECDHE-ECDSA-CHACHA20-POLY1305',
+      'ECDHE-RSA-CHACHA20-POLY1305',
+      'DHE-RSA-AES128-GCM-SHA256',
+      'DHE-RSA-AES256-GCM-SHA384',
+      'TLS_AES_256_GCM_SHA384',
+      'TLS_CHACHA20_POLY1305_SHA256',
+      'TLS_AES_128_GCM_SHA256',
+    ].join(':'),
+    honorCipherOrder: true,
+  };
 
-    // const httpsOptions = {
-    //     key: fs.readFileSync(process.env.SSL_KEY_PATH!),
-    //     cert: fs.readFileSync(process.env.SSL_CERT_PATH!),
-    //     secureProtocol: 'TLS_method',
-    //     ciphers: [
-    //         'ECDHE-ECDSA-AES128-GCM-SHA256',
-    //         'ECDHE-RSA-AES128-GCM-SHA256',
-    //         'ECDHE-ECDSA-AES256-GCM-SHA384',
-    //         'ECDHE-RSA-AES256-GCM-SHA384',
-    //         'ECDHE-ECDSA-CHACHA20-POLY1305',
-    //         'ECDHE-RSA-CHACHA20-POLY1305',
-    //         'DHE-RSA-AES128-GCM-SHA256',
-    //         'DHE-RSA-AES256-GCM-SHA384',
-    //         'TLS_AES_256_GCM_SHA384',
-    //         'TLS_CHACHA20_POLY1305_SHA256',
-    //         'TLS_AES_128_GCM_SHA256',
-    //     ].join(':'),
-    //     honorCipherOrder: true,
-    // };
-
-    const app = await NestFactory.create<NestExpressApplication>(
-        AppModule,
-        {
-          // httpsOptions
-        }
-    );
-    app.useStaticAssets(join(__dirname, '..', 'uploads'), { prefix: '/uploads/' });
-    app.use(cookieParser());
-    app.enableCors({
-        origin: 'http://localhost:3000',
-        credentials: true
-    });
-    app.useGlobalPipes(new ValidationPipe());
-    await app.listen(process.env.PORT ?? 8080);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    httpsOptions,
+  });
+  app.useStaticAssets(join(__dirname, '..', 'uploads'), {
+    prefix: '/uploads/',
+  });
+  app.use(cookieParser());
+  app.enableCors({
+    origin: 'https://ukladka-plitki.ru',
+    credentials: true,
+  });
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(process.env.PORT ?? 3001);
 }
 
-bootstrap().then(r => r);
+bootstrap().then((r) => r);
