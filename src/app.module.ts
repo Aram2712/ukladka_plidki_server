@@ -15,18 +15,18 @@ import { ForumModule } from './forum/forum.module';
     ConfigModule.forRoot({
       isGlobal: true,
       // envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
-      envFilePath: `.env.${process.env.NODE_ENV || 'production'}`,
+      envFilePath: `.env.production`,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        type: 'mysql',
-        host: config.get('DB_HOST'),
-        port: parseInt(<string>config.get('DB_PORT'), 10),
-        username: config.get('DB_USERNAME'),
-        password: config.get('DB_PASSWORD'),
-        database: config.get('DB_NAME'),
+        type: 'mysql' as const,
+        host: config.get<string>('DB_HOST') ?? 'localhost',
+        port: Number(config.get<string>('DB_PORT')) || 3306,
+        username: config.get<string>('DB_USERNAME') ?? 'root',
+        password: config.get<string>('DB_PASSWORD') ?? '',
+        database: config.get<string>('DB_NAME') ?? 'test',
         autoLoadEntities: true,
         synchronize: true, // ⚠️ только для разработки!
       }),
