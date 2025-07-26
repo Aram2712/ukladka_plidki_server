@@ -6,14 +6,15 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
+import { readFileSync } from 'fs';
 
 dotenv.config();
 
 async function bootstrap() {
   // let process;
   const httpsOptions = {
-    key: '/etc/letsencrypt/live/ukladka-plitki.ru/privkey.pem)',
-    cert: '/etc/letsencrypt/live/ukladka-plitki.ru/fullchain.pem',
+    key: readFileSync('/etc/letsencrypt/live/ukladka-plitki.ru/privkey.pem'),
+    cert: readFileSync('/etc/letsencrypt/live/ukladka-plitki.ru/fullchain.pem'),
     secureProtocol: 'TLS_method',
     ciphers: [
       'ECDHE-ECDSA-AES128-GCM-SHA256',
