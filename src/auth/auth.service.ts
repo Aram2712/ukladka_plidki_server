@@ -30,6 +30,9 @@ export class AuthService {
     if (findUser) {
       return findUser;
     }
+    else {
+      return new UnauthorizedException('User not found');
+    }
   }
 
   async getAllUsers(): Promise<AuthEntity[]> {
