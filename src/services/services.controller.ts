@@ -32,21 +32,21 @@ export class ServicesController {
 
   @Post()
   @UseInterceptors(
-    AnyFilesInterceptor({
-      storage: diskStorage({
-        destination: './uploads/tmp',
-        filename: (req, file, cb) => {
-          const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9);
-          cb(null, uniqueName + extname(file.originalname));
-        },
+      AnyFilesInterceptor({
+        storage: diskStorage({
+          destination: '/var/www/ukladka/uploads/tmp',
+          filename: (req, file, cb) => {
+            const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9);
+            cb(null, uniqueName + extname(file.originalname));
+          },
+        }),
       }),
-    }),
   )
   async createService(
-    @UploadedFiles() files: Express.Multer.File[],
-    @Body() service: ServicesDto,
+      @UploadedFiles() files: Express.Multer.File[],
+      @Body() service: ServicesDto,
   ) {
-    const finalDir = './uploads';
+    const finalDir = '/var/www/ukladka/uploads';
     fs.mkdirSync(finalDir, { recursive: true });
 
     const savedFilenames: string[] = [];
@@ -54,12 +54,12 @@ export class ServicesController {
     for (const file of files) {
       const ext = extname(file.originalname);
       const baseName = file.filename.replace(ext, '');
-      const filePath = join(finalDir, baseName + '.webp');
+      const webpPath = join(finalDir, baseName + '.webp');
       const destPath = join(finalDir, file.filename);
 
       if (file.mimetype.startsWith('image/')) {
         try {
-          await sharp(file.path).webp({ quality: 80 }).toFile(filePath);
+          await sharp(file.path).webp({ quality: 80 }).toFile(webpPath);
           fs.unlinkSync(file.path); // удаляем оригинал
           savedFilenames.push(baseName + '.webp');
         } catch (err) {
@@ -69,7 +69,7 @@ export class ServicesController {
         fs.renameSync(file.path, destPath); // перемещаем в uploads
         savedFilenames.push(file.filename);
       } else {
-        fs.unlinkSync(file.path); // ненужные типы удаляем
+        fs.unlinkSync(file.path); // удаляем неподдерживаемые типы
       }
     }
 
