@@ -14,8 +14,8 @@ import { ForumModule } from './forum/forum.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      // envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
-      // envFilePath: `.env.production`,
+      // envFilePath: `.env.development`,
+      envFilePath: `.env.production`,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -25,8 +25,8 @@ import { ForumModule } from './forum/forum.module';
       //     host: config.get<string>('DB_HOST') ?? 'localhost',
       //     port: Number(config.get<string>('DB_PORT')) || 3306,
       //     username: config.get<string>('DB_USERNAME') ?? 'root',
-      //     password: config.get<string>('DB_PASSWORD') ?? '',
-      //     database: config.get<string>('DB_NAME') ?? 'test',
+      //     password: config.get<string>('DB_PASSWORD') ?? 'root',
+      //     database: config.get<string>('DB_NAME') ?? 'uklad_plidka',
       //     autoLoadEntities: true,
       //     synchronize: true, // ⚠️ только для разработки!
       //   })

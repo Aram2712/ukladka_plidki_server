@@ -15,23 +15,23 @@ export class AuthService {
     const findUser = await this.authEntity.findOneBy({
       phoneNumber: user.phoneNumber,
     });
+    console.log(findUser)
     if (findUser) {
-      return 'User already exists';
-    } else {
+      return ;
+    }
+    else {
       const newUser = this.authEntity.create({ ...user });
       await this.authEntity.save(newUser);
+      return newUser;
     }
   }
 
-  async signIn(user: SignInDto): Promise<AuthEntity | UnauthorizedException> {
+  async signIn(user: SignInDto): Promise<AuthEntity | undefined> {
     const findUser = await this.authEntity.findOneBy({
       phoneNumber: user.phoneNumber,
     });
     if (findUser) {
       return findUser;
-    }
-    else {
-      return new UnauthorizedException('User not found');
     }
   }
 

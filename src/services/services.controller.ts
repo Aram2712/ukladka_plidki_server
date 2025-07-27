@@ -51,7 +51,12 @@ export class ServicesController {
 
     const savedFilenames: string[] = [];
 
-    for (const file of files) {
+    const images = files.filter(file => file.mimetype.startsWith('image/'));
+    const videos = files.filter(file => file.mimetype.startsWith('video/'));
+
+    const sortFiles = images.concat(videos);
+
+    for (const file of sortFiles) {
       const ext = extname(file.originalname);
       const baseName = file.filename.replace(ext, '');
       const webpPath = join(finalDir, baseName + '.webp');

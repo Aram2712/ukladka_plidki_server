@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import * as fs from 'fs';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as cookieParser from 'cookie-parser';
@@ -11,7 +10,6 @@ import { readFileSync } from 'fs';
 dotenv.config();
 
 async function bootstrap() {
-  // let process;
   const httpsOptions = {
     key: readFileSync('/etc/letsencrypt/live/ukladka-plitki.ru/privkey.pem'),
     cert: readFileSync('/etc/letsencrypt/live/ukladka-plitki.ru/fullchain.pem'),
