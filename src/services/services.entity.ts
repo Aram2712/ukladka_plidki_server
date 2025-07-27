@@ -14,6 +14,6 @@ export class ServicesEntity {
   @Column()
   price: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   imagesPaths: string;
 }
