@@ -16,7 +16,7 @@ import { PriceListModule } from './priceList/priceList.module';
     ConfigModule.forRoot({
       isGlobal: true,
       // envFilePath: `.env.development`,
-      envFilePath: `.env.production`,
+      // envFilePath: `.env.production`,
     }),
       TypeOrmModule.forRootAsync({
           imports: [ConfigModule],
@@ -27,11 +27,11 @@ import { PriceListModule } from './priceList/priceList.module';
               console.log('DB_NAME:', config.get<string>('DB_NAME'));
               return {
                   type: 'mysql',
-                  host: config.get<string>('DB_HOST'),
-                  port: Number(config.get<string>('DB_PORT')) || 3306,
-                  username: config.get<string>('DB_USERNAME'),
-                  password: config.get<string>('DB_PASSWORD'),
-                  database: config.get<string>('DB_NAME'),
+                  host: 'localhost',
+                  port: 3306,
+                  username: 'plidkaroot',
+                  password: 'plidkapass',
+                  database: 'ukladplidki',
                   autoLoadEntities: true,
                   synchronize: true,
               };
