@@ -15,32 +15,32 @@ import { PriceListModule } from './priceList/priceList.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.env.development`,
-      // envFilePath: `.env.production`,
+      // envFilePath: `.env.development`,
+      envFilePath: `.env.production`,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-          type: 'mysql' as const,
-          host: config.get<string>('DB_HOST') ?? 'localhost',
-          port: Number(config.get<string>('DB_PORT')) || 3306,
-          username: config.get<string>('DB_USERNAME') ?? 'root',
-          password: config.get<string>('DB_PASSWORD') ?? 'root',
-          database: config.get<string>('DB_NAME') ?? 'uklad_plidka',
-          autoLoadEntities: true,
-          synchronize: true, // ⚠️ только для разработки!
+      // useFactory: (config: ConfigService) => ({
+      //     type: 'mysql' as const,
+      //     host: config.get<string>('DB_HOST') ?? 'localhost',
+      //     port: Number(config.get<string>('DB_PORT')) || 3306,
+      //     username: config.get<string>('DB_USERNAME') ?? 'root',
+      //     password: config.get<string>('DB_PASSWORD') ?? 'root',
+      //     database: config.get<string>('DB_NAME') ?? 'uklad_plidka',
+      //     autoLoadEntities: true,
+      //     synchronize: true, // ⚠️ только для разработки!
+      //   })
+        useFactory: () => ({
+            type: 'mysql' as const,
+            host: 'localhost',
+            port: 3306,
+            username: 'plidkaroot',
+            password: 'plidkapass',
+            database: 'ukladplidki',
+            autoLoadEntities: true,
+            synchronize: true, // ⚠️ только для разработки!
         })
-        // useFactory: () => ({
-        //     type: 'mysql' as const,
-        //     host: 'localhost',
-        //     port: 3306,
-        //     username: 'plidkaroot',
-        //     password: 'plidkapass',
-        //     database: 'ukladplidki',
-        //     autoLoadEntities: true,
-        //     synchronize: true, // ⚠️ только для разработки!
-        // })
     }),
     AuthModule,
     ServicesModule,
