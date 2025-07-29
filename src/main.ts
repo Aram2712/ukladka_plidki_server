@@ -42,7 +42,7 @@ async function bootstrap() {
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
-  await app.listen(8080);
+  await app.listen(3001);
 }
 
 bootstrap().then((r) => r);
