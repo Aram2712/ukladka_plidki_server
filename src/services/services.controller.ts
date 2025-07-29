@@ -32,27 +32,27 @@ export class ServicesController {
 
   @Post()
   @UseInterceptors(
-      AnyFilesInterceptor({
-        storage: diskStorage({
-          destination: '/var/www/ukladka/uploads/tmp',
-          filename: (req, file, cb) => {
-            const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9);
-            cb(null, uniqueName + extname(file.originalname));
-          },
-        }),
+    AnyFilesInterceptor({
+      storage: diskStorage({
+        destination: '/var/www/ukladka/uploads/tmp',
+        filename: (req, file, cb) => {
+          const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1e9);
+          cb(null, uniqueName + extname(file.originalname));
+        },
       }),
+    }),
   )
   async createService(
-      @UploadedFiles() files: Express.Multer.File[],
-      @Body() service: ServicesDto,
+    @UploadedFiles() files: Express.Multer.File[],
+    @Body() service: ServicesDto,
   ) {
     const finalDir = '/var/www/ukladka/uploads';
     fs.mkdirSync(finalDir, { recursive: true });
 
     const savedFilenames: string[] = [];
 
-    const images = files.filter(file => file.mimetype.startsWith('image/'));
-    const videos = files.filter(file => file.mimetype.startsWith('video/'));
+    const images = files.filter((file) => file.mimetype.startsWith('image/'));
+    const videos = files.filter((file) => file.mimetype.startsWith('video/'));
 
     const sortFiles = images.concat(videos);
 

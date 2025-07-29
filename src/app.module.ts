@@ -30,16 +30,16 @@ import { ForumModule } from './forum/forum.module';
       //     autoLoadEntities: true,
       //     synchronize: true, // ⚠️ только для разработки!
       //   })
-        useFactory: () => ({
-            type: 'mysql' as const,
-            host: 'localhost',
-            port: 3306,
-            username: 'plidkaroot',
-            password: 'plidkapass',
-            database: 'ukladplidki',
-            autoLoadEntities: true,
-            synchronize: true, // ⚠️ только для разработки!
-        })
+      useFactory: () => ({
+        type: 'mysql' as const,
+        host: 'localhost',
+        port: 3306,
+        username: 'plidkaroot',
+        password: 'plidkapass',
+        database: 'ukladplidki',
+        autoLoadEntities: true,
+        synchronize: true, // ⚠️ только для разработки!
+      }),
     }),
     AuthModule,
     ServicesModule,

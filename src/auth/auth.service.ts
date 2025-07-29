@@ -15,11 +15,10 @@ export class AuthService {
     const findUser = await this.authEntity.findOneBy({
       phoneNumber: user.phoneNumber,
     });
-    console.log(findUser)
+    console.log(findUser);
     if (findUser) {
-      return ;
-    }
-    else {
+      return;
+    } else {
       const newUser = this.authEntity.create({ ...user });
       await this.authEntity.save(newUser);
       return newUser;

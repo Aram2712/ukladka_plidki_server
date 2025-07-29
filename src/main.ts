@@ -30,8 +30,8 @@ async function bootstrap() {
     honorCipherOrder: true,
   };
 
-  const app = await NestFactory.create<NestExpressApplication>(AppModule,{
-    httpsOptions
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    httpsOptions,
   });
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
