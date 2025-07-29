@@ -6,6 +6,10 @@ export class ServicesDto {
 
   @IsString()
   @IsNotEmpty()
+  header: string;
+
+  @IsString()
+  @IsNotEmpty()
   title: string;
 
   @IsString()

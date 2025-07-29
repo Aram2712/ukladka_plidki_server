@@ -80,6 +80,7 @@ export class ServicesController {
 
     const newData = {
       title: service.title,
+      header: service.header,
       description: service.description,
       price: service.price,
       imagesPaths: savedFilenames.join(','),
