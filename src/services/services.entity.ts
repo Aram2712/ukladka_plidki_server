@@ -6,6 +6,9 @@ export class ServicesEntity {
   id: number;
 
   @Column()
+  header: string;
+
+  @Column()
   title: string;
 
   @Column()
