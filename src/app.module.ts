@@ -35,7 +35,7 @@ import { PriceListModule } from './priceList/priceList.module';
             type: 'mysql' as const,
             host: 'localhost',
             port: 3306,
-            username: 'plidkaroot',
+            username: 'root',
             password: 'plidkapass',
             database: 'ukladplidki',
             autoLoadEntities: true,
