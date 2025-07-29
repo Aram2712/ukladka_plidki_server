@@ -21,16 +21,22 @@ import { PriceListModule } from './priceList/priceList.module';
       TypeOrmModule.forRootAsync({
           imports: [ConfigModule],
           inject: [ConfigService],
-          useFactory: (config: ConfigService): TypeOrmModuleOptions => ({
-              type: 'mysql',
-              host: 'localhost',
-              port: 3306,
-              username: 'root',
-              password: 'plidkapass',
-              database: 'ukladplidki',
-              autoLoadEntities: true,
-              synchronize: true, // ⚠️ отключи в проде позже!
-          }),
+          useFactory: (config: ConfigService): TypeOrmModuleOptions => {
+              console.log('DB_USERNAME:', config.get<string>('DB_USERNAME'));
+              console.log('DB_PASSWORD:', config.get<string>('DB_PASSWORD'));
+              console.log('DB_NAME:', config.get<string>('DB_NAME'));
+              return {
+                  type: 'mysql',
+                  host: config.get<string>('DB_HOST'),
+                  port: Number(config.get<string>('DB_PORT')) || 3306,
+                  username: config.get<string>('DB_USERNAME'),
+                  password: config.get<string>('DB_PASSWORD'),
+                  database: config.get<string>('DB_NAME'),
+                  autoLoadEntities: true,
+                  synchronize: true,
+              };
+          },
+
       }),
     AuthModule,
     ServicesModule,
