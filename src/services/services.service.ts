@@ -12,7 +12,8 @@ export class ServicesService {
   ) {}
 
   async findAll(): Promise<ServicesEntity[]> {
-    return await this.servicesEntity.find();
+    const allData = await this.servicesEntity.find();
+    return allData.reverse();
   }
 
   async createService(service: ServicesDto): Promise<void> {
