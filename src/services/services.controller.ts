@@ -93,4 +93,9 @@ export class ServicesController {
   deleteService(@Param('id') id: number) {
     return this.servicesService.deleteService(id);
   }
+
+  @Post('news/:id')
+  isLooked(@Param('id') id: number) {
+    return this.servicesService.markNewsAsRead(id);
+  }
 }

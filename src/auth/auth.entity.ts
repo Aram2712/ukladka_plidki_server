@@ -1,4 +1,4 @@
-import { Column, PrimaryGeneratedColumn, OneToMany, Entity } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
 
 @Entity()
 export class AuthEntity {
@@ -16,4 +16,7 @@ export class AuthEntity {
 
   @Column()
   role: string;
+
+  @Column()
+  isLookedLastNews: boolean;
 }

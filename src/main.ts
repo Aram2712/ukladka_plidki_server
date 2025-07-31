@@ -3,9 +3,9 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import { readFileSync } from 'fs';
 import * as cookieParser from 'cookie-parser';
 import * as dotenv from 'dotenv';
-import { readFileSync } from 'fs';
 
 dotenv.config();
 
