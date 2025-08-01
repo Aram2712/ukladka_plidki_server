@@ -36,6 +36,21 @@ import { PriceListModule } from './priceList/priceList.module';
           synchronize: true,
         };
       },
+      // useFactory: (config: ConfigService): TypeOrmModuleOptions => {
+      //   console.log('DB_USERNAME:', config.get<string>('DB_USERNAME'));
+      //   console.log('DB_PASSWORD:', config.get<string>('DB_PASSWORD'));
+      //   console.log('DB_NAME:', config.get<string>('DB_NAME'));
+      //   return {
+      //     type: 'mysql',
+      //     host: 'localhost',
+      //     port: 3307,
+      //     username: 'root',
+      //     password: 'root',
+      //     database: 'uklad_plidka',
+      //     autoLoadEntities: true,
+      //     synchronize: true,
+      //   };
+      // },
     }),
     AuthModule,
     ServicesModule,
