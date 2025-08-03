@@ -36,6 +36,7 @@ import { PriceListModule } from './priceList/priceList.module';
           synchronize: true,
         };
       },
+
         // useFactory: (config: ConfigService): TypeOrmModuleOptions => {
         //     return {
         //         type: 'mysql',
@@ -47,7 +48,7 @@ import { PriceListModule } from './priceList/priceList.module';
         //         autoLoadEntities: true,
         //         synchronize: true,
         //     };
-        // },
+        // }
     }),
     AuthModule,
     ServicesModule,

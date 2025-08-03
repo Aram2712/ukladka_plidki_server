@@ -38,7 +38,11 @@ async function bootstrap() {
   });
   app.use(cookieParser());
   app.enableCors({
-    origin: ['https://ukladka-plitki.ru', 'http://localhost:3000'],
+    origin: [
+      'https://ukladka-plitki.ru',
+      'http://localhost:3000',
+      'http://localhost:4000',
+    ],
     credentials: true,
   });
   app.useGlobalPipes(new ValidationPipe());
