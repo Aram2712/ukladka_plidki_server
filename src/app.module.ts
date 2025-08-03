@@ -36,6 +36,18 @@ import { PriceListModule } from './priceList/priceList.module';
           synchronize: true,
         };
       },
+        // useFactory: (config: ConfigService): TypeOrmModuleOptions => {
+        //     return {
+        //         type: 'mysql',
+        //         host: 'localhost',
+        //         port: 3306,
+        //         username: 'root',
+        //         password: 'root',
+        //         database: 'uklad_plidka',
+        //         autoLoadEntities: true,
+        //         synchronize: true,
+        //     };
+        // },
     }),
     AuthModule,
     ServicesModule,
